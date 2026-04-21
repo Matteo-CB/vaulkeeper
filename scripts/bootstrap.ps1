@@ -30,19 +30,24 @@ if ($Clean) {
     }
 }
 
+if (-not $env:VCPKG_INSTALLED_DIR) {
+    $env:VCPKG_INSTALLED_DIR = 'D:/vk_installed'
+}
+
 if (-not $NoVcpkgUpdate) {
-    Write-Host "Updating vcpkg manifest dependencies"
+    Write-Host "Updating vcpkg manifest dependencies (install root: $env:VCPKG_INSTALLED_DIR)"
     $overlay = Join-Path $repoRoot 'vcpkg-triplets'
     $env:VCPKG_MAX_CONCURRENCY = '1'
     $env:CMAKE_BUILD_PARALLEL_LEVEL = '4'
     & "$env:VCPKG_ROOT/vcpkg.exe" install `
         --triplet x64-windows-static-md `
         --overlay-triplets="$overlay" `
-        --x-manifest-root="$repoRoot"
+        --x-manifest-root="$repoRoot" `
+        --x-install-root="$env:VCPKG_INSTALLED_DIR"
     if ($LASTEXITCODE -ne 0) { throw "vcpkg install failed" }
 }
 
-cmake --preset $Preset
+cmake --preset $Preset -DVCPKG_INSTALLED_DIR="$env:VCPKG_INSTALLED_DIR"
 if ($LASTEXITCODE -ne 0) { throw "cmake configure failed" }
 
 cmake --build --preset $Preset
