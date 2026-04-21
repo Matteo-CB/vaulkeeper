@@ -7,17 +7,57 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+$repoRoot = Split-Path -Parent $PSScriptRoot
+Set-Location $repoRoot
+
+function Remove-MsysFromPath {
+    $parts = $env:Path -split ';'
+    $kept = $parts | Where-Object {
+        $p = $_.ToLower()
+        -not ($p -match 'msys2|msys64|mingw32|mingw64|devkitpro|cygwin')
+    }
+    $env:Path = ($kept -join ';')
+}
+
+function Import-VcVars {
+    $vswhere = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe'
+    if (-not (Test-Path $vswhere)) {
+        throw "vswhere.exe not found, cannot locate Visual Studio install"
+    }
+    $vsPath = & $vswhere -latest -products * -property installationPath 2>$null | Select-Object -First 1
+    if (-not $vsPath) {
+        throw "no Visual Studio installation detected by vswhere"
+    }
+    $vcvars = Join-Path $vsPath 'VC\Auxiliary\Build\vcvars64.bat'
+    if (-not (Test-Path $vcvars)) {
+        throw "vcvars64.bat not found at $vcvars"
+    }
+    Write-Host "loading vcvars64 from $vsPath"
+    $output = cmd /c "`"$vcvars`" >NUL && set"
+    foreach ($line in $output) {
+        if ($line -match '^([^=]+)=(.*)$') {
+            [Environment]::SetEnvironmentVariable($matches[1], $matches[2], 'Process')
+        }
+    }
+}
+
+Remove-MsysFromPath
+Import-VcVars
+
 function Assert-Command($name) {
     if (-not (Get-Command $name -ErrorAction SilentlyContinue)) {
         throw "Required command '$name' not found in PATH."
     }
 }
 
-$repoRoot = Split-Path -Parent $PSScriptRoot
-Set-Location $repoRoot
-
 Assert-Command cmake
 Assert-Command ninja
+Assert-Command cl
+
+$cmakeCmd = (Get-Command cmake).Source
+Write-Host "cmake : $cmakeCmd"
+Write-Host "ninja : $((Get-Command ninja).Source)"
+Write-Host "cl    : $((Get-Command cl).Source)"
 
 if (-not $env:VCPKG_ROOT -or -not (Test-Path $env:VCPKG_ROOT)) {
     throw "VCPKG_ROOT is not set or does not exist. Install vcpkg and export VCPKG_ROOT."
@@ -47,10 +87,10 @@ if (-not $NoVcpkgUpdate) {
     if ($LASTEXITCODE -ne 0) { throw "vcpkg install failed" }
 }
 
-cmake --preset $Preset -DVCPKG_INSTALLED_DIR="$env:VCPKG_INSTALLED_DIR"
+& $cmakeCmd --preset $Preset "-DVCPKG_INSTALLED_DIR=$env:VCPKG_INSTALLED_DIR"
 if ($LASTEXITCODE -ne 0) { throw "cmake configure failed" }
 
-cmake --build --preset $Preset
+& $cmakeCmd --build --preset $Preset
 if ($LASTEXITCODE -ne 0) { throw "cmake build failed" }
 
 Write-Host "Build complete: build/$Preset/bin"
