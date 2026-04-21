@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+    <Bundle Name="!(loc.BundleName)"
+            Version="$(var.ProductVersion)"
+            Manufacturer="Vaulkeeper"
+            UpgradeCode="41F1B1D7-4D16-4D0A-9E89-5713E0EE2CD2"
+            IconSourceFile="$(var.BrandDir)/vaulkeeper.ico"
+            AboutUrl="https://vaulkeeper.local"
+            HelpUrl="https://vaulkeeper.local/docs"
+            UpdateUrl="https://vaulkeeper.local/releases">
+
+        <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+            <Payload SourceFile="$(var.BrandDir)/banner-wide.png" />
+            <Payload SourceFile="$(var.BrandDir)/logo-setup.png" />
+            <bal:WixStandardBootstrapperApplication
+                LicenseUrl="https://vaulkeeper.local/license"
+                LogoFile="$(var.BrandDir)/logo-setup.png"
+                ThemeFile="$(var.ThemeDir)/bundle-theme.xml"
+                LocalizationFile="$(var.ThemeDir)/bundle-theme.wxl"
+                SuppressOptionsUI="no"
+                SuppressDowngradeFailure="no" />
+        </BootstrapperApplicationRef>
+
+        <util:RegistrySearch Id="DetectVcRedist"
+                             Root="HKLM"
+                             Key="SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64"
+                             Value="Installed"
+                             Result="exists"
+                             Variable="VcRedistInstalled" />
+
+        <Variable Name="InstallFolder" Type="string" Value="[ProgramFiles64Folder]Vaulkeeper" bal:Overridable="yes" />
+        <Variable Name="LaunchTarget" Type="string" Value="[InstallFolder]\vaulkeeper.exe" />
+
+        <Chain>
+            <ExePackage Id="VcRedist"
+                        Cache="no"
+                        Compressed="yes"
+                        PerMachine="yes"
+                        Permanent="yes"
+                        Vital="yes"
+                        SourceFile="$(var.RedistDir)/vc_redist.x64.exe"
+                        InstallCommand="/install /quiet /norestart"
+                        RepairCommand="/repair /quiet /norestart"
+                        UninstallCommand="/uninstall /quiet /norestart"
+                        DetectCondition="VcRedistInstalled" />
+
+            <MsiPackage Id="VaulkeeperMsi"
+                        Cache="yes"
+                        Compressed="yes"
+                        DisplayInternalUI="no"
+                        Visible="no"
+                        SourceFile="$(var.MsiFile)">
+                <MsiProperty Name="INSTALLFOLDER" Value="[InstallFolder]" />
+            </MsiPackage>
+        </Chain>
+    </Bundle>
+</Wix>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <Product Id="*"
+             Name="Vaulkeeper"
+             Language="!(loc.LANG)"
+             Version="$(var.ProductVersion)"
+             Manufacturer="Vaulkeeper"
+             UpgradeCode="B9F3F2C2-3D5F-4FBB-A0D2-93C1B6A54A2A">
+        <Package InstallerVersion="500"
+                 Compressed="yes"
+                 InstallScope="perMachine"
+                 Description="!(loc.Description)"
+                 Manufacturer="Vaulkeeper" />
+
+        <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" />
+        <MediaTemplate EmbedCab="yes" />
+
+        <Icon Id="VaulkeeperIcon.ico" SourceFile="$(var.BrandDir)/vaulkeeper.ico" />
+        <Property Id="ARPPRODUCTICON" Value="VaulkeeperIcon.ico" />
+        <Property Id="ARPURLINFOABOUT" Value="https://vaulkeeper.local" />
+        <Property Id="ARPHELPLINK" Value="https://vaulkeeper.local/docs" />
+        <Property Id="ARPURLUPDATEINFO" Value="https://vaulkeeper.local/releases" />
+
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+        <UIRef Id="WixUI_InstallDir" />
+        <UIRef Id="WixUI_ErrorProgressText" />
+        <WixVariable Id="WixUIBannerBmp" Value="$(var.BrandDir)/banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="$(var.BrandDir)/dialog.bmp" />
+        <WixVariable Id="WixUILicenseRtf" Value="$(var.BrandDir)/license.rtf" />
+
+        <Feature Id="MainFeature" Title="!(loc.MainFeature)" Level="1" Display="expand">
+            <ComponentGroupRef Id="ApplicationFiles" />
+            <ComponentRef Id="RegistryEntries" />
+            <ComponentRef Id="StartMenuShortcut" />
+            <ComponentRef Id="PathEntry" />
+        </Feature>
+
+        <Feature Id="ShellIntegration" Title="!(loc.ShellIntegration)" Level="1">
+            <ComponentRef Id="ShellExtensionComponent" />
+        </Feature>
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFiles64Folder">
+                <Directory Id="INSTALLFOLDER" Name="Vaulkeeper" />
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ProgramMenuSubfolder" Name="Vaulkeeper" />
+            </Directory>
+        </Directory>
+
+        <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
+            <Component Id="MainApp" Guid="E7E27A5F-3BCD-4B4E-B927-3F0AD9A66E65">
+                <File Id="VaulkeeperExe" Source="$(var.BuildBinDir)/vaulkeeper.exe" KeyPath="yes" />
+            </Component>
+            <Component Id="CliApp" Guid="2BFC1E0E-7E42-4E7F-A9E4-1D1F7B7C04DC">
+                <File Id="VkCli" Source="$(var.BuildBinDir)/vk.exe" />
+            </Component>
+            <Component Id="Agent" Guid="1AA54C4B-7181-456B-9FB6-FC18361F2AAE">
+                <File Id="VaulkeeperAgentExe" Source="$(var.BuildBinDir)/VaulkeeperAgent.exe" />
+            </Component>
+            <Component Id="Updater" Guid="9C5B2AC8-2F5E-43E4-9D4C-9A4F1B5F52FD">
+                <File Id="VkUpdaterExe" Source="$(var.BuildBinDir)/vk-updater.exe" />
+            </Component>
+        </ComponentGroup>
+
+        <Component Id="ShellExtensionComponent" Directory="INSTALLFOLDER" Guid="7F27D0C4-79A6-4D73-8DD2-D9F8E18EB7E2">
+            <File Id="ShellExtDll" Source="$(var.BuildBinDir)/vaulkeeper.shellext.dll" KeyPath="yes" SelfRegCost="1" />
+        </Component>
+
+        <Component Id="RegistryEntries" Directory="INSTALLFOLDER" Guid="7C0D2F7B-5E41-47BE-8C4F-1E8BBBD40DDC">
+            <RegistryValue Root="HKLM"
+                           Key="Software\Vaulkeeper"
+                           Name="InstallPath"
+                           Type="string"
+                           Value="[INSTALLFOLDER]"
+                           KeyPath="yes" />
+            <RegistryValue Root="HKLM"
+                           Key="Software\Vaulkeeper"
+                           Name="Version"
+                           Type="string"
+                           Value="$(var.ProductVersion)" />
+        </Component>
+
+        <Component Id="PathEntry" Directory="INSTALLFOLDER" Guid="D1E40A7A-4A2D-4F44-90A0-7C94EBA2A6E2">
+            <RegistryValue Root="HKLM"
+                           Key="Software\Vaulkeeper\Cli"
+                           Name="Added"
+                           Type="integer"
+                           Value="1"
+                           KeyPath="yes" />
+            <Environment Id="PathCli"
+                         Name="PATH"
+                         Value="[INSTALLFOLDER]"
+                         Permanent="no"
+                         Part="last"
+                         Action="set"
+                         System="yes" />
+        </Component>
+
+        <Component Id="StartMenuShortcut" Directory="ProgramMenuSubfolder" Guid="B4E1B4A6-1B50-4D7F-9B51-4D6D3D0FF18C">
+            <Shortcut Id="StartMenuApp"
+                      Name="Vaulkeeper"
+                      Target="[INSTALLFOLDER]vaulkeeper.exe"
+                      WorkingDirectory="INSTALLFOLDER"
+                      Icon="VaulkeeperIcon.ico"
+                      IconIndex="0" />
+            <RemoveFolder Id="RemoveProgramMenuSubfolder" On="uninstall" />
+            <RegistryValue Root="HKCU"
+                           Key="Software\Vaulkeeper"
+                           Name="ShortcutInstalled"
+                           Type="integer"
+                           Value="1"
+                           KeyPath="yes" />
+        </Component>
+    </Product>
+</Wix>

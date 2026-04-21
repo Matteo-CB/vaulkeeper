@@ -1,0 +1,23 @@
+PackageIdentifier: Vaulkeeper.Vaulkeeper
+PackageVersion: 0.1.0
+MinimumOSVersion: 10.0.19041.0
+InstallerType: burn
+Scope: machine
+InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+UpgradeBehavior: install
+Protocols:
+  - vaulkeeper
+Commands:
+  - vk
+FileExtensions: []
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://vaulkeeper.local/releases/v0.1.0/VaulkeeperSetup.exe
+    InstallerSha256: 0000000000000000000000000000000000000000000000000000000000000000
+    ProductCode: B9F3F2C2-3D5F-4FBB-A0D2-93C1B6A54A2A
+ReleaseDate: 2026-04-20
+ManifestType: installer
+ManifestVersion: 1.6.0

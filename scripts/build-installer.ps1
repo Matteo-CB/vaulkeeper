@@ -1,0 +1,73 @@
+param(
+    [string]$Preset = 'msvc-release-installer',
+    [switch]$SkipVcpkg,
+    [switch]$Sign,
+    [string]$CertThumbprint = '',
+    [switch]$NoRedistCheck
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+$repoRoot = Split-Path -Parent $PSScriptRoot
+Set-Location $repoRoot
+
+if (-not $env:VCPKG_ROOT -or -not (Test-Path $env:VCPKG_ROOT)) {
+    throw "VCPKG_ROOT is not set. Install vcpkg and export VCPKG_ROOT."
+}
+
+$wixCandle = Get-Command candle.exe -ErrorAction SilentlyContinue
+$wixLight = Get-Command light.exe -ErrorAction SilentlyContinue
+if (-not $wixCandle -or -not $wixLight) {
+    throw "WiX Toolset 3.11 or newer is required. Install it and ensure candle.exe and light.exe are in PATH."
+}
+
+$redistDir = Join-Path $repoRoot 'third_party/vc_redist'
+$redistExe = Join-Path $redistDir 'vc_redist.x64.exe'
+if (-not $NoRedistCheck -and -not (Test-Path $redistExe)) {
+    if (-not (Test-Path $redistDir)) { New-Item -ItemType Directory -Path $redistDir | Out-Null }
+    Write-Host "Downloading vc_redist.x64.exe"
+    Invoke-WebRequest -Uri 'https://aka.ms/vs/17/release/vc_redist.x64.exe' -OutFile $redistExe
+}
+
+$brandDir = Join-Path $repoRoot 'assets/brand'
+$requiredBrand = @('vaulkeeper.ico', 'banner.bmp', 'dialog.bmp', 'banner-wide.png', 'logo-setup.png', 'license.rtf')
+$missing = @()
+foreach ($asset in $requiredBrand) {
+    $path = Join-Path $brandDir $asset
+    if (-not (Test-Path $path)) { $missing += $asset }
+}
+if ($missing.Count -gt 0) {
+    Write-Warning ("Missing brand assets: {0}" -f ($missing -join ', '))
+    Write-Warning "Generating minimal placeholders so the build can proceed."
+    & "$PSScriptRoot/brand-placeholders.ps1" -BrandDir $brandDir
+    if ($LASTEXITCODE -ne 0) { throw "brand placeholder generation failed" }
+}
+
+if (-not $SkipVcpkg) {
+    $overlay = Join-Path $repoRoot 'vcpkg-triplets'
+    $env:VCPKG_MAX_CONCURRENCY = '1'
+    $env:CMAKE_BUILD_PARALLEL_LEVEL = '4'
+    & "$env:VCPKG_ROOT/vcpkg.exe" install `
+        --triplet x64-windows-static-md `
+        --overlay-triplets="$overlay" `
+        --x-manifest-root="$repoRoot"
+    if ($LASTEXITCODE -ne 0) { throw "vcpkg install failed" }
+}
+
+cmake --preset $Preset
+if ($LASTEXITCODE -ne 0) { throw "cmake configure failed" }
+
+cmake --build --preset $Preset --target vaulkeeper_installer
+if ($LASTEXITCODE -ne 0) { throw "installer build failed" }
+
+$setupExe = Join-Path $repoRoot "build/$Preset/installer/VaulkeeperSetup.exe"
+if (-not (Test-Path $setupExe)) { throw "VaulkeeperSetup.exe not produced" }
+
+if ($Sign) {
+    if (-not $CertThumbprint) { throw "Provide -CertThumbprint when using -Sign" }
+    & "$PSScriptRoot/sign.ps1" -BinaryDir (Split-Path -Parent $setupExe) -CertThumbprint $CertThumbprint
+}
+
+Get-FileHash $setupExe -Algorithm SHA256 | Out-File "$setupExe.sha256" -Encoding ascii
+Write-Host "Installer ready: $setupExe"

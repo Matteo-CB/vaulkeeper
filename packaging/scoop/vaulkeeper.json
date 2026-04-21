@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "description": "Native Windows storage manager",
+  "homepage": "https://vaulkeeper.local",
+  "license": "Proprietary",
+  "architecture": {
+    "64bit": {
+      "url": "https://vaulkeeper.local/releases/v0.1.0/vaulkeeper-portable.zip",
+      "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "extract_dir": ""
+    }
+  },
+  "bin": [
+    "vaulkeeper.exe",
+    "vk.exe",
+    "vk-updater.exe"
+  ],
+  "shortcuts": [
+    [ "vaulkeeper.exe", "Vaulkeeper" ]
+  ],
+  "checkver": {
+    "url": "https://vaulkeeper.local/releases/latest.json",
+    "jsonpath": "$.version"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://vaulkeeper.local/releases/v$version/vaulkeeper-portable.zip"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization xmlns="http://schemas.microsoft.com/wix/2006/localization" Culture="de-de" Codepage="1252">
+    <String Id="Caption">Vaulkeeper Installation</String>
+    <String Id="Title">Vaulkeeper installieren</String>
+    <String Id="Tagline">Nativer Windows Speichermanager. Schnelle Scans, sichere Bereinigung, klare Berichte.</String>
+    <String Id="EulaHyperlink">Lizenz lesen</String>
+    <String Id="EulaAcceptCheckbox">Ich akzeptiere die Lizenzbedingungen</String>
+    <String Id="BundleName">Vaulkeeper</String>
+    <String Id="InstallButton">Installieren</String>
+    <String Id="RepairButton">Reparieren</String>
+    <String Id="UninstallButton">Deinstallieren</String>
+    <String Id="CloseButton">Schliessen</String>
+    <String Id="LoadingMessage">Installer wird vorbereitet</String>
+    <String Id="FolderLabel">Installationsordner</String>
+    <String Id="BrowseButton">Durchsuchen</String>
+    <String Id="OkButton">OK</String>
+    <String Id="CancelButton">Abbrechen</String>
+    <String Id="InstallingMessage">Vaulkeeper wird installiert</String>
+    <String Id="SuccessHeading">Installation abgeschlossen</String>
+    <String Id="SuccessBody">Vaulkeeper ist bereit. Jetzt starten oder im Startmenue oeffnen.</String>
+    <String Id="LaunchButton">Starten</String>
+    <String Id="FailureHeading">Installation fehlgeschlagen</String>
+    <String Id="FailureLogLink">Installationsprotokoll anzeigen</String>
+    <String Id="HelpText">Kommandozeilen Optionen:
+/passive stille Installation mit Fortschrittsanzeige
+/quiet stille Installation ohne Oberflaeche
+/uninstall Vaulkeeper entfernen
+/layout &lt;Pfad&gt; Setup Dateien in einen Ordner kopieren</String>
+</WixLocalization>

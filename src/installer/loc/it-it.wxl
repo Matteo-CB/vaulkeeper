@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="it-IT" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="LANG">1040</String>
+    <String Id="Description">Gestore dello storage Vaulkeeper per Windows</String>
+    <String Id="NewerInstalled">E' gia installata una versione piu recente di Vaulkeeper.</String>
+    <String Id="MainFeature">Applicazione Vaulkeeper</String>
+    <String Id="ShellIntegration">Menu contestuale di Esplora risorse</String>
+</WixLocalization>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-US" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="LANG">1033</String>
+    <String Id="Description">Vaulkeeper storage manager for Windows</String>
+    <String Id="NewerInstalled">A newer version of Vaulkeeper is already installed.</String>
+    <String Id="MainFeature">Vaulkeeper application</String>
+    <String Id="ShellIntegration">Explorer context menu</String>
+</WixLocalization>

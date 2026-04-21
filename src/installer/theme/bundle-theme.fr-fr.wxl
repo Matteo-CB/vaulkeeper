@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization xmlns="http://schemas.microsoft.com/wix/2006/localization" Culture="fr-fr" Codepage="1252">
+    <String Id="Caption">Installation de Vaulkeeper</String>
+    <String Id="Title">Installer Vaulkeeper</String>
+    <String Id="Tagline">Gestionnaire de stockage natif pour Windows. Scans rapides, nettoyages surs, rapports clairs.</String>
+    <String Id="EulaHyperlink">Lire la licence</String>
+    <String Id="EulaAcceptCheckbox">J'accepte les termes de la licence</String>
+    <String Id="BundleName">Vaulkeeper</String>
+    <String Id="InstallButton">Installer</String>
+    <String Id="RepairButton">Reparer</String>
+    <String Id="UninstallButton">Desinstaller</String>
+    <String Id="CloseButton">Fermer</String>
+    <String Id="LoadingMessage">Preparation de l'installeur</String>
+    <String Id="FolderLabel">Emplacement d'installation</String>
+    <String Id="BrowseButton">Parcourir</String>
+    <String Id="OkButton">OK</String>
+    <String Id="CancelButton">Annuler</String>
+    <String Id="InstallingMessage">Installation de Vaulkeeper</String>
+    <String Id="SuccessHeading">Installation terminee</String>
+    <String Id="SuccessBody">Vaulkeeper est pret. Lance le maintenant ou retrouve le dans le menu demarrer.</String>
+    <String Id="LaunchButton">Lancer</String>
+    <String Id="FailureHeading">Installation echouee</String>
+    <String Id="FailureLogLink">Voir le journal d'installation</String>
+    <String Id="HelpText">Options en ligne de commande :
+/passive installation silencieuse avec progression
+/quiet installation silencieuse, sans interface
+/uninstall desinstalle Vaulkeeper
+/layout &lt;chemin&gt; copie la charge d'installation dans un dossier</String>
+</WixLocalization>

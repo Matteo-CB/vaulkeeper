@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/fonts">
+    <file alias="Inter-Regular.ttf">fonts/Inter-Regular.ttf</file>
+    <file alias="Inter-SemiBold.ttf">fonts/Inter-SemiBold.ttf</file>
+    <file alias="JetBrainsMono-Regular.ttf">fonts/JetBrainsMono-Regular.ttf</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization xmlns="http://schemas.microsoft.com/wix/2006/localization" Culture="en-us" Codepage="1252">
+    <String Id="Caption">Vaulkeeper setup</String>
+    <String Id="Title">Install Vaulkeeper</String>
+    <String Id="Tagline">Native Windows storage manager. Fast scans, safe cleanups, clear reports.</String>
+    <String Id="EulaHyperlink">Read the license</String>
+    <String Id="EulaAcceptCheckbox">I accept the license terms</String>
+    <String Id="BundleName">Vaulkeeper</String>
+    <String Id="InstallButton">Install</String>
+    <String Id="RepairButton">Repair</String>
+    <String Id="UninstallButton">Uninstall</String>
+    <String Id="CloseButton">Close</String>
+    <String Id="LoadingMessage">Preparing the installer</String>
+    <String Id="FolderLabel">Install location</String>
+    <String Id="BrowseButton">Browse</String>
+    <String Id="OkButton">OK</String>
+    <String Id="CancelButton">Cancel</String>
+    <String Id="InstallingMessage">Installing Vaulkeeper</String>
+    <String Id="SuccessHeading">Installation complete</String>
+    <String Id="SuccessBody">Vaulkeeper is ready. Launch it now or find it in the start menu.</String>
+    <String Id="LaunchButton">Launch</String>
+    <String Id="FailureHeading">Installation failed</String>
+    <String Id="FailureLogLink">View the setup log</String>
+    <String Id="HelpText">Command line options:
+/passive silent install with progress
+/quiet silent install, no UI
+/uninstall remove Vaulkeeper
+/layout &lt;path&gt; copy the setup payload to a folder</String>
+</WixLocalization>

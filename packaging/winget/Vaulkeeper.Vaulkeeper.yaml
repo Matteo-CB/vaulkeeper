@@ -1,0 +1,22 @@
+PackageIdentifier: Vaulkeeper.Vaulkeeper
+PackageVersion: 0.1.0
+PackageLocale: en-US
+Publisher: Vaulkeeper
+PublisherUrl: https://vaulkeeper.local
+PublisherSupportUrl: https://vaulkeeper.local/support
+PackageName: Vaulkeeper
+PackageUrl: https://vaulkeeper.local
+License: Proprietary
+LicenseUrl: https://vaulkeeper.local/license
+ShortDescription: Native Windows storage manager
+Description: Vaulkeeper inspects storage, finds duplicates, uninstalls apps cleanly, and automates maintenance safely.
+Moniker: vaulkeeper
+Tags:
+  - storage
+  - cleanup
+  - ntfs
+  - smart
+  - duplicates
+ReleaseDate: 2026-04-20
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

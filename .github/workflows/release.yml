@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: seanmiddleditch/gha-setup-ninja@v5
+      - uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgGitCommitId: 5e6578b62d9e4ac5a563e816802a56818540cd2e
+      - name: Build signed package
+        shell: pwsh
+        env:
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        run: |
+          powershell -ExecutionPolicy Bypass -File scripts/package.ps1 -Preset msvc-release-installer
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vaulkeeper-release
+          path: dist/*

@@ -1,0 +1,16 @@
+#pragma once
+
+#include <string_view>
+
+namespace vk::version {
+
+inline constexpr int Major = @VK_VERSION_MAJOR@;
+inline constexpr int Minor = @VK_VERSION_MINOR@;
+inline constexpr int Patch = @VK_VERSION_PATCH@;
+inline constexpr std::string_view String = "@VK_VERSION_STRING@";
+inline constexpr std::string_view GitSha = "@VK_GIT_SHA@";
+inline constexpr std::string_view GitBranch = "@VK_GIT_BRANCH@";
+inline constexpr std::string_view BuildDate = "@VK_BUILD_DATE@";
+inline constexpr std::string_view BuildTime = "@VK_BUILD_TIME@";
+
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Theme xmlns="http://wixtoolset.org/schemas/thmutil/2010">
+    <Window Width="640" Height="420" HexStyle="100a0000" FontId="0">#(loc.Caption)</Window>
+
+    <Font Id="0" Height="-12" Weight="500" Foreground="EEEEEE" Background="0B0D10">Segoe UI</Font>
+    <Font Id="1" Height="-22" Weight="700" Foreground="FFFFFF" Background="0B0D10">Segoe UI</Font>
+    <Font Id="2" Height="-11" Weight="400" Foreground="9AA0AA" Background="0B0D10">Segoe UI</Font>
+    <Font Id="3" Height="-12" Weight="500" Foreground="FFFFFF" Background="2D6FE0">Segoe UI</Font>
+    <Font Id="4" Height="-12" Weight="500" Foreground="E85A5A" Background="0B0D10">Segoe UI</Font>
+
+    <Image X="0" Y="0" Width="640" Height="140" ImageFile="banner-wide.png" Visible="yes" />
+
+    <Text X="24" Y="160" Width="-24" Height="32" FontId="1" DisablePrefix="yes">#(loc.Title)</Text>
+    <Text X="24" Y="198" Width="-24" Height="56" FontId="2" DisablePrefix="yes">#(loc.Tagline)</Text>
+
+    <Richedit X="24" Y="260" Width="-24" Height="70" TabStop="yes" FontId="2" HideWhenDisabled="yes" Name="EulaRichedit" />
+
+    <Hypertext Name="EulaHyperlink" X="24" Y="334" Width="-24" Height="16" TabStop="yes" FontId="2" HideWhenDisabled="yes">#(loc.EulaHyperlink)</Hypertext>
+    <Checkbox Name="EulaAcceptCheckbox" X="24" Y="354" Width="-24" Height="18" TabStop="yes" FontId="2">#(loc.EulaAcceptCheckbox)</Checkbox>
+
+    <Button Name="InstallButton" X="-150" Y="-22" Width="130" Height="32" TabStop="yes" FontId="3" HideWhenDisabled="yes">#(loc.InstallButton)</Button>
+    <Button Name="RepairButton" X="-150" Y="-22" Width="130" Height="32" TabStop="yes" FontId="3" HideWhenDisabled="yes">#(loc.RepairButton)</Button>
+    <Button Name="UninstallButton" X="-150" Y="-22" Width="130" Height="32" TabStop="yes" FontId="3" HideWhenDisabled="yes">#(loc.UninstallButton)</Button>
+    <Button Name="CloseButton" X="-12" Y="-22" Width="130" Height="32" TabStop="yes" FontId="2">#(loc.CloseButton)</Button>
+
+    <Page Name="Loading">
+        <Text X="24" Y="260" Width="-24" Height="24" FontId="2">#(loc.LoadingMessage)</Text>
+    </Page>
+
+    <Page Name="Help">
+        <Text X="24" Y="260" Width="-24" Height="160" FontId="2">#(loc.HelpText)</Text>
+    </Page>
+
+    <Page Name="Install">
+        <!-- covered by the global layout -->
+    </Page>
+
+    <Page Name="Options">
+        <Text X="24" Y="260" Width="-24" Height="20" FontId="2">#(loc.FolderLabel)</Text>
+        <Editbox Name="InstallFolder" X="24" Y="282" Width="-160" Height="22" TabStop="yes" FontId="0" />
+        <Button Name="BrowseButton" X="-24" Y="282" Width="120" Height="22" TabStop="yes" FontId="2">#(loc.BrowseButton)</Button>
+        <Button Name="OptionsOkButton" X="-150" Y="-22" Width="130" Height="32" TabStop="yes" FontId="3">#(loc.OkButton)</Button>
+        <Button Name="OptionsCancelButton" X="-12" Y="-22" Width="130" Height="32" TabStop="yes" FontId="2">#(loc.CancelButton)</Button>
+    </Page>
+
+    <Page Name="Progress">
+        <Text X="24" Y="260" Width="-24" Height="20" FontId="2">#(loc.InstallingMessage)</Text>
+        <Progressbar Name="ProgressbarOverall" X="24" Y="290" Width="-24" Height="14" />
+        <Text Name="OverallProgressPackageText" X="24" Y="314" Width="-24" Height="18" FontId="2" DisablePrefix="yes" />
+    </Page>
+
+    <Page Name="Success">
+        <Text X="24" Y="260" Width="-24" Height="24" FontId="1">#(loc.SuccessHeading)</Text>
+        <Text X="24" Y="296" Width="-24" Height="40" FontId="2">#(loc.SuccessBody)</Text>
+        <Button Name="LaunchButton" X="-150" Y="-22" Width="130" Height="32" TabStop="yes" FontId="3">#(loc.LaunchButton)</Button>
+    </Page>
+
+    <Page Name="Failure">
+        <Text X="24" Y="260" Width="-24" Height="24" FontId="4">#(loc.FailureHeading)</Text>
+        <Text Name="FailureMessageText" X="24" Y="296" Width="-24" Height="60" FontId="2" DisablePrefix="yes" />
+        <Hypertext Name="FailureLogFileLink" X="24" Y="358" Width="-24" Height="16" FontId="2" TabStop="yes" HideWhenDisabled="yes">#(loc.FailureLogLink)</Hypertext>
+    </Page>
+</Theme>

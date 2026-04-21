@@ -1,0 +1,14 @@
+PackageIdentifier: Vaulkeeper.Vaulkeeper
+PackageVersion: 0.1.0
+PackageLocale: fr-FR
+Publisher: Vaulkeeper
+PackageName: Vaulkeeper
+License: Proprietary
+ShortDescription: Gestionnaire de stockage natif pour Windows
+Description: Vaulkeeper analyse le stockage, trouve les doublons, desinstalle proprement les applications et automatise la maintenance en toute securite.
+Tags:
+  - stockage
+  - nettoyage
+  - ntfs
+ManifestType: locale
+ManifestVersion: 1.6.0

@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/">
+    <file>icons/vaulkeeper.svg</file>
+    <file>icons/scan.svg</file>
+    <file>icons/duplicates.svg</file>
+    <file>icons/uninstall.svg</file>
+    <file>icons/rules.svg</file>
+    <file>icons/quarantine.svg</file>
+    <file>icons/report.svg</file>
+  </qresource>
+</RCC>
