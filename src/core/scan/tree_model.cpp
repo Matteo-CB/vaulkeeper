@@ -17,6 +17,7 @@ struct TreeBuilder::Impl {
 };
 
 TreeBuilder::TreeBuilder() : impl(std::make_unique<Impl>()) {}
+TreeBuilder::~TreeBuilder() = default;
 
 void TreeBuilder::add(const FileEntry& entry) {
     auto& interner = StringInterner::pathInterner();

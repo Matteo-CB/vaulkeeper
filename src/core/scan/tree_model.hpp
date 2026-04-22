@@ -10,6 +10,7 @@ namespace vk::core {
 class TreeBuilder {
 public:
     TreeBuilder();
+    ~TreeBuilder();
 
     VK_NONCOPYABLE(TreeBuilder);
     VK_NONMOVABLE(TreeBuilder);
