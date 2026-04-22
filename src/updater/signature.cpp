@@ -48,12 +48,12 @@ core::Result<std::string> sha256OfFile(const std::filesystem::path& binary) {
 #ifdef _WIN32
     HCRYPTPROV provider = 0;
     if (!CryptAcquireContextW(&provider, nullptr, nullptr, PROV_RSA_AES, CRYPT_VERIFYCONTEXT)) {
-        return core::fromLastOsError("crypt acquire");
+        return core::fail(core::fromLastOsError("crypt acquire"));
     }
     HCRYPTHASH hash = 0;
     if (!CryptCreateHash(provider, CALG_SHA_256, 0, 0, &hash)) {
         CryptReleaseContext(provider, 0);
-        return core::fromLastOsError("crypt create hash");
+        return core::fail(core::fromLastOsError("crypt create hash"));
     }
 
     std::ifstream stream(binary, std::ios::binary);
@@ -69,7 +69,7 @@ core::Result<std::string> sha256OfFile(const std::filesystem::path& binary) {
         if (!CryptHashData(hash, buffer.data(), read, 0)) {
             CryptDestroyHash(hash);
             CryptReleaseContext(provider, 0);
-            return core::fromLastOsError("crypt hash data");
+            return core::fail(core::fromLastOsError("crypt hash data"));
         }
     }
 
@@ -78,7 +78,7 @@ core::Result<std::string> sha256OfFile(const std::filesystem::path& binary) {
     if (!CryptGetHashParam(hash, HP_HASHVAL, digest.data(), &digestSize, 0)) {
         CryptDestroyHash(hash);
         CryptReleaseContext(provider, 0);
-        return core::fromLastOsError("crypt get hash");
+        return core::fail(core::fromLastOsError("crypt get hash"));
     }
 
     CryptDestroyHash(hash);
