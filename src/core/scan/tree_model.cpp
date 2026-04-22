@@ -7,24 +7,17 @@
 
 namespace vk::core {
 
-struct TreeBuilder::Impl {
-    std::shared_ptr<ScanNode> root;
-
-    Impl() {
-        root = std::make_shared<ScanNode>();
-        root->name = StringInterner::pathInterner().intern("");
-    }
-};
-
-TreeBuilder::TreeBuilder() : impl(std::make_unique<Impl>()) {}
-TreeBuilder::~TreeBuilder() = default;
+TreeBuilder::TreeBuilder() {
+    rootNode = std::make_shared<ScanNode>();
+    rootNode->name = StringInterner::pathInterner().intern("");
+}
 
 void TreeBuilder::add(const FileEntry& entry) {
     auto& interner = StringInterner::pathInterner();
     const auto fullPath = std::string(interner.view(entry.parentPath));
     std::filesystem::path parsed(fullPath);
 
-    ScanNode* cursor = impl->root.get();
+    ScanNode* cursor = rootNode.get();
     for (const auto& segment : parsed) {
         const auto name = segment.generic_string();
         if (name.empty() || name == "/") { continue; }
@@ -42,8 +35,8 @@ void TreeBuilder::add(const FileEntry& entry) {
 }
 
 std::shared_ptr<ScanNode> TreeBuilder::build() {
-    propagateTotals(*impl->root);
-    return impl->root;
+    propagateTotals(*rootNode);
+    return rootNode;
 }
 
 ScanNode* findOrInsertChild(ScanNode& parent, std::string_view name) {

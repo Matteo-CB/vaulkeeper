@@ -4,13 +4,13 @@
 #include <string_view>
 
 #include "fs/file_entry.hpp"
+#include "util/macros.hpp"
 
 namespace vk::core {
 
 class TreeBuilder {
 public:
     TreeBuilder();
-    ~TreeBuilder();
 
     VK_NONCOPYABLE(TreeBuilder);
     VK_NONMOVABLE(TreeBuilder);
@@ -19,8 +19,7 @@ public:
     [[nodiscard]] std::shared_ptr<ScanNode> build();
 
 private:
-    struct Impl;
-    std::unique_ptr<Impl> impl;
+    std::shared_ptr<ScanNode> rootNode;
 };
 
 [[nodiscard]] ScanNode* findOrInsertChild(ScanNode& parent, std::string_view name);
