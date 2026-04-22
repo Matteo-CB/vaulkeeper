@@ -31,7 +31,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 34
                 placeholderText: qsTr("Folder to inspect")
-                text: ""
+                text: applicationVm.defaultDuplicatesRoot()
                 color: Theme.textPrimary
                 leftPadding: 12
                 rightPadding: 12
@@ -40,6 +40,7 @@ Item {
 
             PrimaryButton {
                 text: qsTr("Find duplicates")
+                enabled: rootInput.text.length > 0
                 onClicked: duplicatesVm.run(rootInput.text)
             }
         }

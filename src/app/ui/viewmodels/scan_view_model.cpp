@@ -6,6 +6,7 @@
 
 #include "fs/volume.hpp"
 #include "ui/viewmodels/application_view_model.hpp"
+#include "util/bytes.hpp"
 
 namespace vk::app {
 
@@ -59,17 +60,29 @@ void ScanViewModel::scanRoots(const QStringList& roots) {
                 return;
             }
             QVariantList summaries;
+            std::uint64_t totalScanned = 0;
+            for (const auto& v : result->volumes) {
+                totalScanned += v.scannedBytes;
+            }
             for (const auto& v : result->volumes) {
                 QVariantMap row;
-                row["mount"] = QString::fromStdString(v.mountPoint.generic_string());
+                const auto mount = v.mountPoint.generic_string();
+                row["name"] = QString::fromStdString(mount);
+                row["mount"] = QString::fromStdString(mount);
                 row["total"] = static_cast<qlonglong>(v.totalBytes);
                 row["scanned"] = static_cast<qlonglong>(v.scannedBytes);
+                row["bytes"] = QString::fromStdString(core::formatBytes(v.scannedBytes));
                 row["files"] = static_cast<qlonglong>(v.fileCount);
+                row["ratio"] = totalScanned == 0
+                                   ? 0.0
+                                   : static_cast<double>(v.scannedBytes) / static_cast<double>(totalScanned);
                 summaries.push_back(row);
             }
             volumes = std::move(summaries);
             emit resultChanged();
-            application->notify("Scan finished");
+            application->notify(QString("Scan finished: %1 files, %2")
+                                    .arg(result->stats.filesIndexed)
+                                    .arg(QString::fromStdString(core::formatBytes(result->stats.bytesIndexed))));
         }, Qt::QueuedConnection);
     });
 }

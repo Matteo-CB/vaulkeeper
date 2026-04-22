@@ -47,6 +47,13 @@ public slots:
     void notify(const QString& message);
     void commitFirstRunComplete();
 
+public:
+    Q_INVOKABLE QString buildAuditReport(const QString& format) const;
+    Q_INVOKABLE bool exportAuditReport(const QString& path, const QString& format) const;
+    Q_INVOKABLE bool promptAndExportAudit(const QString& format);
+    Q_INVOKABLE QString suggestedHomeFolder() const;
+    Q_INVOKABLE QString defaultDuplicatesRoot() const;
+
 signals:
     void statusChanged();
     void currentPageChanged();
