@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <vector>
+#include <filesystem>
+#include <string>
 
 #include "uninstall/application.hpp"
 #include "util/result.hpp"

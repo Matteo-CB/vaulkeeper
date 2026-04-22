@@ -3,6 +3,8 @@
 #include <atomic>
 #include <functional>
 #include <memory>
+#include <filesystem>
+#include <string>
 
 #include "scan/scan_options.hpp"
 #include "scan/scan_result.hpp"

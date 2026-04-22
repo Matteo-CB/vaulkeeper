@@ -3,6 +3,7 @@
 #include <QColor>
 #include <QObject>
 #include <QString>
+#include <string>
 
 namespace vk::app {
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "commands/command.hpp"
 
 namespace vk::cli {

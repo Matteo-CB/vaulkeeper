@@ -5,6 +5,7 @@
 #include <string_view>
 
 #include <spdlog/spdlog.h>
+#include <string>
 
 #include "util/macros.hpp"
 

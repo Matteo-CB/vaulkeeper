@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <filesystem>
 #include <optional>
+#include <string>
 
 #include "fs/file_entry.hpp"
 #include "util/result.hpp"

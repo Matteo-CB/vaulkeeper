@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <vector>
+#include <filesystem>
+#include <string>
 
 #include "rules/rule.hpp"
 #include "util/result.hpp"

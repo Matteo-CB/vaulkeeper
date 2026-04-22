@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "cleaners/cleaner.hpp"
 
 namespace vk::core {
