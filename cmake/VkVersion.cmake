@@ -31,7 +31,7 @@ string(TIMESTAMP VK_BUILD_TIME "%H:%M:%S" UTC)
 
 configure_file(
     "${CMAKE_SOURCE_DIR}/cmake/version.hpp.in"
-    "${CMAKE_BINARY_DIR}/generated/vk/util/version.hpp"
+    "${CMAKE_BINARY_DIR}/generated/util/version.hpp"
     @ONLY)
 
 function(vk_print_summary)
