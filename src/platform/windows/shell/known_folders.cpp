@@ -13,7 +13,7 @@ namespace {
 core::Result<std::filesystem::path> fromKnownFolder(REFKNOWNFOLDERID id) {
     PWSTR path = nullptr;
     if (SHGetKnownFolderPath(id, 0, nullptr, &path) != S_OK) {
-        return core::fromLastOsError("known folder");
+        return core::fail(core::fromLastOsError("known folder"));
     }
     std::filesystem::path result { path };
     CoTaskMemFree(path);
@@ -75,7 +75,7 @@ core::Result<std::filesystem::path> temp() {
 #ifdef _WIN32
     wchar_t buffer[MAX_PATH] {};
     if (GetTempPathW(MAX_PATH, buffer) == 0) {
-        return core::fromLastOsError("temp path");
+        return core::fail(core::fromLastOsError("temp path"));
     }
     return std::filesystem::path { buffer };
 #else

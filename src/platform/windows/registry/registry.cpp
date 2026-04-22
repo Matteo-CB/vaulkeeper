@@ -33,7 +33,7 @@ core::Result<std::vector<std::string>> enumerateSubkeys(RegistryHive hive, std::
 #ifdef _WIN32
     HKEY handle {};
     if (RegOpenKeyExA(translate(hive), std::string(path).c_str(), 0, access(wow64, KEY_READ), &handle) != ERROR_SUCCESS) {
-        return core::fromLastOsError("registry open");
+        return core::fail(core::fromLastOsError("registry open"));
     }
     std::vector<std::string> subkeys;
     std::array<char, 256> buffer {};
@@ -58,7 +58,7 @@ core::Result<std::vector<RegistryValue>> readValues(RegistryHive hive, std::stri
 #ifdef _WIN32
     HKEY handle {};
     if (RegOpenKeyExA(translate(hive), std::string(path).c_str(), 0, access(wow64, KEY_READ), &handle) != ERROR_SUCCESS) {
-        return core::fromLastOsError("registry open");
+        return core::fail(core::fromLastOsError("registry open"));
     }
     std::vector<RegistryValue> values;
     std::array<char, 1024> nameBuffer {};
@@ -105,12 +105,12 @@ core::Result<void> writeString(RegistryHive hive, std::string_view path, std::st
 #ifdef _WIN32
     HKEY handle {};
     if (RegCreateKeyExA(translate(hive), std::string(path).c_str(), 0, nullptr, 0, KEY_WRITE, nullptr, &handle, nullptr) != ERROR_SUCCESS) {
-        return core::fromLastOsError("registry create");
+        return core::fail(core::fromLastOsError("registry create"));
     }
     const auto rc = RegSetValueExA(handle, std::string(valueName).c_str(), 0, REG_SZ,
                                    reinterpret_cast<const BYTE*>(data.data()), static_cast<DWORD>(data.size() + 1));
     RegCloseKey(handle);
-    if (rc != ERROR_SUCCESS) { return core::fromLastOsError("registry set"); }
+    if (rc != ERROR_SUCCESS) { return core::fail(core::fromLastOsError("registry set")); }
     return core::ok();
 #else
     (void)hive; (void)path; (void)valueName; (void)data;
@@ -121,7 +121,7 @@ core::Result<void> writeString(RegistryHive hive, std::string_view path, std::st
 core::Result<void> deleteKey(RegistryHive hive, std::string_view path, bool wow64) {
 #ifdef _WIN32
     const auto rc = RegDeleteKeyExA(translate(hive), std::string(path).c_str(), wow64 ? KEY_WOW64_32KEY : KEY_WOW64_64KEY, 0);
-    if (rc != ERROR_SUCCESS) { return core::fromLastOsError("registry delete"); }
+    if (rc != ERROR_SUCCESS) { return core::fail(core::fromLastOsError("registry delete")); }
     return core::ok();
 #else
     (void)hive; (void)path; (void)wow64;

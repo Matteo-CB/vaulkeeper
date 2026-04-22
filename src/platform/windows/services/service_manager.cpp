@@ -9,7 +9,7 @@ namespace vk::platform::windows {
 core::Result<std::vector<ServiceDescriptor>> enumerateServices() {
 #ifdef _WIN32
     SC_HANDLE manager = OpenSCManagerW(nullptr, nullptr, SC_MANAGER_ENUMERATE_SERVICE);
-    if (manager == nullptr) { return core::fromLastOsError("scm open"); }
+    if (manager == nullptr) { return core::fail(core::fromLastOsError("scm open")); }
 
     DWORD bytesNeeded = 0;
     DWORD servicesReturned = 0;

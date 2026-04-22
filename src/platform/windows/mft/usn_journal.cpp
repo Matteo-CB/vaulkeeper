@@ -13,7 +13,7 @@ core::Result<std::vector<UsnChange>> readUsnJournal(const std::wstring& volume, 
                                 FILE_SHARE_READ | FILE_SHARE_WRITE,
                                 nullptr, OPEN_EXISTING, 0, nullptr);
     if (handle == INVALID_HANDLE_VALUE) {
-        return core::fromLastOsError("usn open");
+        return core::fail(core::fromLastOsError("usn open"));
     }
 
     USN_JOURNAL_DATA_V2 journalData {};

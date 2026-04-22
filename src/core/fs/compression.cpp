@@ -17,15 +17,15 @@ Result<void> applyCompression(const std::filesystem::path& path, USHORT format) 
                                 nullptr, OPEN_EXISTING,
                                 FILE_FLAG_BACKUP_SEMANTICS, nullptr);
     if (handle == INVALID_HANDLE_VALUE) {
-        return fromLastOsError("compression open");
+        return std::unexpected<Error> { fromLastOsError("compression open") };
     }
     DWORD returned = 0;
-    const bool ok = DeviceIoControl(handle, FSCTL_SET_COMPRESSION,
-                                    &format, sizeof(format),
-                                    nullptr, 0, &returned, nullptr) != 0;
+    const bool success = DeviceIoControl(handle, FSCTL_SET_COMPRESSION,
+                                         &format, sizeof(format),
+                                         nullptr, 0, &returned, nullptr) != 0;
     CloseHandle(handle);
-    if (!ok) {
-        return fromLastOsError("compression set");
+    if (!success) {
+        return std::unexpected<Error> { fromLastOsError("compression set") };
     }
     return ok();
 }

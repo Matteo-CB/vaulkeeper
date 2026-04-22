@@ -135,7 +135,7 @@ core::Result<MftBootInfo> readBootSector(const std::wstring& volumePath) {
 #ifdef _WIN32
     HANDLE handle = openVolume(volumePath);
     if (handle == INVALID_HANDLE_VALUE) {
-        return core::fromLastOsError("mft open volume");
+        return core::fail(core::fromLastOsError("mft open volume"));
     }
 
     std::array<std::uint8_t, 512> sector {};
@@ -181,7 +181,7 @@ core::Result<std::size_t> NtfsMftReader::stream(const std::filesystem::path& vol
 
     HANDLE handle = openVolume(volume);
     if (handle == INVALID_HANDLE_VALUE) {
-        return core::fromLastOsError("mft open");
+        return core::fail(core::fromLastOsError("mft open"));
     }
 
     LARGE_INTEGER startPosition {};

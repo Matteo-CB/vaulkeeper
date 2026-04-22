@@ -22,7 +22,7 @@ Result<Message> PipeClient::request(const Message& msg, std::chrono::millisecond
 
     HANDLE pipe = CreateFileA(fullName.c_str(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
     if (pipe == INVALID_HANDLE_VALUE) {
-        return fromLastOsError("pipe open failed");
+        return std::unexpected<Error> { fromLastOsError("pipe open failed") };
     }
 
     DWORD mode = PIPE_READMODE_MESSAGE;

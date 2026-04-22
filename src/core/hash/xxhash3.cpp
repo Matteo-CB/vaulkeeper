@@ -34,7 +34,7 @@ Result<HashDigest128> xxhash3File(const std::filesystem::path& path, std::uint64
     HANDLE file = CreateFileW(path.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                               nullptr, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, nullptr);
     if (file == INVALID_HANDLE_VALUE) {
-        return fromLastOsError("hash open failed");
+        return std::unexpected<Error> { fromLastOsError("hash open failed") };
     }
 
     LARGE_INTEGER size;

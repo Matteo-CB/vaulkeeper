@@ -24,7 +24,7 @@ Result<Blake3Digest> blake3File(const std::filesystem::path& path) {
     HANDLE file = CreateFileW(path.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                               nullptr, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, nullptr);
     if (file == INVALID_HANDLE_VALUE) {
-        return fromLastOsError("blake3 open failed");
+        return std::unexpected<Error> { fromLastOsError("blake3 open failed") };
     }
 
     blake3_hasher hasher;
