@@ -47,8 +47,11 @@
                         Compressed="yes"
                         DisplayInternalUI="no"
                         Visible="no"
+                        ForcePerMachine="yes"
                         SourceFile="$(var.MsiFile)">
                 <MsiProperty Name="INSTALLFOLDER" Value="[InstallFolder]" />
+                <MsiProperty Name="MSIRESTARTMANAGERCONTROL" Value="Disable" />
+                <MsiProperty Name="ARPNOMODIFY" Value="1" />
             </MsiPackage>
         </Chain>
     </Bundle>

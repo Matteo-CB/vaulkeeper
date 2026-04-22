@@ -17,6 +17,11 @@
         <MajorUpgrade DowngradeErrorMessage="!(loc.NewerInstalled)" />
         <MediaTemplate EmbedCab="yes" />
 
+        <Property Id="REBOOT" Value="ReallySuppress" />
+        <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" />
+        <Property Id="MSIDISABLERMRESTART" Value="1" />
+        <Property Id="MSIRMSHUTDOWN" Value="2" />
+
         <Icon Id="VaulkeeperIcon.ico" SourceFile="$(var.BrandDir)/vaulkeeper.ico" />
         <Property Id="ARPPRODUCTICON" Value="VaulkeeperIcon.ico" />
         <Property Id="ARPURLINFOABOUT" Value="https://vaulkeeper.local" />
