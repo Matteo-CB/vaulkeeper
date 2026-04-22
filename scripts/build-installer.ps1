@@ -35,7 +35,8 @@ function Import-VcVars {
         throw "vcvars64.bat not found at $vcvars"
     }
     Write-Host "loading vcvars64 from $vsPath"
-    $output = cmd /c "`"$vcvars`" >NUL && set"
+    $winCmd = Join-Path $env:SystemRoot 'System32\cmd.exe'
+    $output = & $winCmd /c "`"$vcvars`" >NUL && set"
     foreach ($line in $output) {
         if ($line -match '^([^=]+)=(.*)$') {
             [Environment]::SetEnvironmentVariable($matches[1], $matches[2], 'Process')
