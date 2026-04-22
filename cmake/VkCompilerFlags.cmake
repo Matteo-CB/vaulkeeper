@@ -32,7 +32,8 @@ function(vk_apply_compiler_flags target)
             /wd4458
             /wd4459
             /wd4267
-            /wd4244)
+            /wd4244
+            /wd4858)
 
         if(VK_STRICT_WARNINGS)
             target_compile_options(${target} PRIVATE /WX)
