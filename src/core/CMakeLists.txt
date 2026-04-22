@@ -128,7 +128,7 @@ vk_add_static_library(vk_core
         absl::strings
     PRIVATE_LIBS
         xxHash::xxhash
-        unofficial::blake3::blake3
+        BLAKE3::blake3
         unofficial::sqlite3::sqlite3
         yaml-cpp::yaml-cpp
         tomlplusplus::tomlplusplus
