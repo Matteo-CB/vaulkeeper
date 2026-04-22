@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Vaulkeeper.Theme 1.0
-import "components"
+import Vaulkeeper
 
 Item {
     ScrollView {

@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
+import Vaulkeeper
 import Vaulkeeper.Theme 1.0
-import "components"
 
 ApplicationWindow {
     id: root
