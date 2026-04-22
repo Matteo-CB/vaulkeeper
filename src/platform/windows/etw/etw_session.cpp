@@ -7,9 +7,9 @@
 #include <vector>
 
 #ifdef _WIN32
+    #include <windows.h>
     #include <evntrace.h>
     #include <tdh.h>
-    #include <windows.h>
     #pragma comment(lib, "tdh.lib")
     #pragma comment(lib, "advapi32.lib")
 #endif

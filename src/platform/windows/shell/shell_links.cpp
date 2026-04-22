@@ -1,11 +1,11 @@
 #include "shell/shell_links.hpp"
 
 #ifdef _WIN32
+    #include <windows.h>
     #include <objbase.h>
-    #include <shobjidl.h>
     #include <shlguid.h>
     #include <shlobj.h>
-    #include <windows.h>
+    #include <shobjidl.h>
 #endif
 
 namespace vk::platform::windows {

@@ -3,9 +3,9 @@
 #include <spdlog/spdlog.h>
 
 #ifdef _WIN32
-    #include <softpub.h>
-    #include <wincrypt.h>
     #include <windows.h>
+    #include <wincrypt.h>
+    #include <softpub.h>
     #include <wintrust.h>
     #pragma comment(lib, "wintrust")
 #endif

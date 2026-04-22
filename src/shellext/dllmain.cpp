@@ -1,8 +1,8 @@
+#include <windows.h>
 #include <olectl.h>
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <string>
-#include <windows.h>
 
 #include "class_factory.hpp"
 

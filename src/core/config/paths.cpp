@@ -3,8 +3,8 @@
 #include <cstdlib>
 
 #ifdef _WIN32
-    #include <shlobj.h>
     #include <windows.h>
+    #include <shlobj.h>
 #endif
 
 namespace vk::core {

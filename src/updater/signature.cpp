@@ -6,9 +6,9 @@
 #include <fmt/format.h>
 
 #ifdef _WIN32
-    #include <softpub.h>
     #include <windows.h>
     #include <wincrypt.h>
+    #include <softpub.h>
     #include <wintrust.h>
     #pragma comment(lib, "wintrust.lib")
     #pragma comment(lib, "crypt32.lib")

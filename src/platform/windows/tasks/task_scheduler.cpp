@@ -2,9 +2,9 @@
 
 #ifdef _WIN32
     #define _WIN32_DCOM
+    #include <windows.h>
     #include <comdef.h>
     #include <taskschd.h>
-    #include <windows.h>
     #pragma comment(lib, "taskschd.lib")
 #endif
 

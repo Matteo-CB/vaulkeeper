@@ -2,9 +2,9 @@
 
 #ifdef _WIN32
     #define _WIN32_DCOM
-    #include <Wbemidl.h>
-    #include <comdef.h>
     #include <windows.h>
+    #include <comdef.h>
+    #include <Wbemidl.h>
 #endif
 
 namespace vk::platform::windows {
