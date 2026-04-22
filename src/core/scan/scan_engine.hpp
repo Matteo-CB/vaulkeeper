@@ -8,6 +8,7 @@
 #include "scan/scan_result.hpp"
 #include "util/result.hpp"
 #include "util/thread_pool.hpp"
+#include "util/macros.hpp"
 
 namespace vk::core {
 

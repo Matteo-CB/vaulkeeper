@@ -9,6 +9,7 @@
 
 #include "util/result.hpp"
 #include "util/time.hpp"
+#include "util/macros.hpp"
 
 struct sqlite3;
 

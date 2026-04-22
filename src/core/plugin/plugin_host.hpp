@@ -6,6 +6,7 @@
 
 #include "plugin/plugin_api.hpp"
 #include "util/result.hpp"
+#include "util/macros.hpp"
 
 namespace vk::core {
 

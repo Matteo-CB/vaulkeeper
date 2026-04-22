@@ -5,6 +5,7 @@
 #include <string_view>
 
 #include "util/result.hpp"
+#include "util/macros.hpp"
 
 struct lua_State;
 

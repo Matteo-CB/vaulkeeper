@@ -6,6 +6,7 @@
 
 #include "fs/file_entry.hpp"
 #include "util/result.hpp"
+#include "util/macros.hpp"
 
 struct sqlite3;
 
