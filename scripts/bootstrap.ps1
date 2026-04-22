@@ -73,6 +73,14 @@ if ($Clean) {
 if (-not $env:VCPKG_INSTALLED_DIR) {
     $env:VCPKG_INSTALLED_DIR = 'D:/vk_installed'
 }
+if (-not $env:VCPKG_DEFAULT_BINARY_CACHE) {
+    $env:VCPKG_DEFAULT_BINARY_CACHE = 'E:/vcpkg-cache'
+}
+if (-not $env:VCPKG_DOWNLOADS) {
+    $env:VCPKG_DOWNLOADS = 'E:/vcpkg-downloads'
+}
+New-Item -ItemType Directory -Path $env:VCPKG_DEFAULT_BINARY_CACHE -Force | Out-Null
+New-Item -ItemType Directory -Path $env:VCPKG_DOWNLOADS -Force | Out-Null
 
 if (-not $NoVcpkgUpdate) {
     Write-Host "Updating vcpkg manifest dependencies (install root: $env:VCPKG_INSTALLED_DIR)"
