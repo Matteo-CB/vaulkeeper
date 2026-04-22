@@ -34,6 +34,7 @@
             <ComponentGroupRef Id="ApplicationFiles" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="StartMenuShortcut" />
+            <ComponentRef Id="DesktopShortcut" />
             <ComponentRef Id="PathEntry" />
         </Feature>
 
@@ -48,6 +49,7 @@
             <Directory Id="ProgramMenuFolder">
                 <Directory Id="ProgramMenuSubfolder" Name="Vaulkeeper" />
             </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop" />
         </Directory>
 
         <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
@@ -110,6 +112,21 @@
             <RegistryValue Root="HKCU"
                            Key="Software\Vaulkeeper"
                            Name="ShortcutInstalled"
+                           Type="integer"
+                           Value="1"
+                           KeyPath="yes" />
+        </Component>
+
+        <Component Id="DesktopShortcut" Directory="DesktopFolder" Win64="yes" Guid="F5D7A2C8-6E4B-4F2A-9C1D-8B3E7A9F2D61">
+            <Shortcut Id="DesktopApp"
+                      Name="Vaulkeeper"
+                      Target="[INSTALLFOLDER]vaulkeeper.exe"
+                      WorkingDirectory="INSTALLFOLDER"
+                      Icon="VaulkeeperIcon.ico"
+                      IconIndex="0" />
+            <RegistryValue Root="HKCU"
+                           Key="Software\Vaulkeeper"
+                           Name="DesktopShortcutInstalled"
                            Type="integer"
                            Value="1"
                            KeyPath="yes" />

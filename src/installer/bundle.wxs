@@ -13,15 +13,10 @@
             UpdateUrl="https://vaulkeeper.local/releases">
 
         <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
-            <Payload SourceFile="$(var.BrandDir)/banner-wide.png" />
-            <Payload SourceFile="$(var.BrandDir)/logo-setup.png" />
             <bal:WixStandardBootstrapperApplication
-                LicenseUrl="https://vaulkeeper.local/license"
+                LicenseUrl=""
                 LogoFile="$(var.BrandDir)/logo-setup.png"
-                ThemeFile="$(var.ThemeDir)/bundle-theme.xml"
-                LocalizationFile="$(var.ThemeDir)/bundle-theme.wxl"
-                SuppressOptionsUI="no"
-                SuppressDowngradeFailure="no" />
+                SuppressOptionsUI="yes" />
         </BootstrapperApplicationRef>
 
         <util:RegistrySearch Id="DetectVcRedist"
