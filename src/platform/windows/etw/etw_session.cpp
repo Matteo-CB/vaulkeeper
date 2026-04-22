@@ -83,7 +83,7 @@ core::Result<void> EtwSession::start(Handler h) {
         logfile.ProcessTraceMode = PROCESS_TRACE_MODE_REAL_TIME | PROCESS_TRACE_MODE_EVENT_RECORD;
         logfile.EventRecordCallback = eventRecordCallback;
 
-        const auto session = OpenTraceW(&logfile);
+        TRACEHANDLE session = OpenTraceW(&logfile);
         if (session != INVALID_PROCESSTRACE_HANDLE) {
             ProcessTrace(&session, 1, nullptr, nullptr);
             CloseTrace(session);

@@ -118,13 +118,13 @@ bool applyUpdateSequence(std::uint8_t* record, std::uint32_t recordSize, std::ui
     return true;
 }
 
-TimePoint filetimeToSystemClock(std::uint64_t filetime) {
-    if (filetime == 0) { return TimePoint {}; }
+core::TimePoint filetimeToSystemClock(std::uint64_t filetime) {
+    if (filetime == 0) { return core::TimePoint {}; }
     constexpr std::uint64_t unixEpochDiff = 116444736000000000ULL;
-    if (filetime < unixEpochDiff) { return TimePoint {}; }
+    if (filetime < unixEpochDiff) { return core::TimePoint {}; }
     const std::uint64_t hundredNs = filetime - unixEpochDiff;
     const auto nanos = std::chrono::nanoseconds { hundredNs * 100 };
-    return TimePoint { std::chrono::duration_cast<SystemClock::duration>(nanos) };
+    return core::TimePoint { std::chrono::duration_cast<core::SystemClock::duration>(nanos) };
 }
 
 #endif
