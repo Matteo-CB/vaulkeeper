@@ -7,25 +7,32 @@ import Vaulkeeper
 Item {
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 24
-        spacing: 16
+        anchors.leftMargin: 28
+        anchors.rightMargin: 28
+        anchors.topMargin: 28
+        anchors.bottomMargin: 28
+        spacing: 18
 
         RowLayout {
             Layout.fillWidth: true
+            spacing: 16
+
             Label {
                 text: qsTr("Scan")
                 color: Theme.textPrimary
-                font.pixelSize: 22
+                font.pixelSize: 24
                 font.bold: true
+                Layout.fillWidth: true
+                elide: Label.ElideRight
             }
-            Item { Layout.fillWidth: true }
-            Button {
+            PrimaryButton {
                 text: scanVm.running ? qsTr("Cancel") : qsTr("Scan all drives")
                 onClicked: scanVm.running ? scanVm.cancel() : scanVm.scanAll()
             }
         }
 
         ScanProgressBar {
+            Layout.fillWidth: true
             progress: scanVm.progress
             currentPath: scanVm.currentPath
             running: scanVm.running
@@ -39,11 +46,15 @@ Item {
                 text: qsTr("Files indexed: %1").arg(scanVm.filesIndexed)
                 color: Theme.textSecondary
                 font.pixelSize: 12
+                Layout.fillWidth: true
+                elide: Label.ElideRight
             }
             Label {
                 text: qsTr("Bytes indexed: %1").arg(scanVm.bytesIndexed)
                 color: Theme.textSecondary
                 font.pixelSize: 12
+                Layout.fillWidth: true
+                elide: Label.ElideRight
             }
         }
 

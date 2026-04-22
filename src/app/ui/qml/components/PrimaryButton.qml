@@ -5,10 +5,11 @@ import Vaulkeeper.Theme 1.0
 Button {
     id: control
     padding: 0
-    leftPadding: 16
-    rightPadding: 16
-    implicitHeight: 34
+    leftPadding: 18
+    rightPadding: 18
+    implicitHeight: 36
     font.pixelSize: 13
+    font.bold: true
 
     contentItem: Text {
         text: control.text
@@ -16,10 +17,13 @@ Button {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font: control.font
+        elide: Text.ElideRight
     }
 
     background: Rectangle {
         radius: 6
-        color: control.hovered ? Qt.lighter(Theme.accent, 1.1) : Theme.accent
+        color: control.pressed
+               ? Qt.darker(Theme.accent, 1.1)
+               : (control.hovered ? Qt.lighter(Theme.accent, 1.1) : Theme.accent)
     }
 }

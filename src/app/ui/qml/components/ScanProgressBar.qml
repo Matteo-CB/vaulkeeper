@@ -9,36 +9,40 @@ Rectangle {
     property string currentPath: ""
     property bool running: false
 
-    radius: 8
+    radius: 10
     color: Theme.surfaceAlt
-    implicitHeight: 48
+    implicitHeight: 56
     Layout.fillWidth: true
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: 12
-        spacing: 12
+        anchors.leftMargin: 18
+        anchors.rightMargin: 18
+        spacing: 16
 
         Rectangle {
             Layout.fillWidth: true
-            height: 4
-            radius: 2
+            Layout.alignment: Qt.AlignVCenter
+            implicitHeight: 6
+            radius: 3
             color: Theme.surface
             Rectangle {
                 width: parent.width * Math.min(1.0, Math.max(0.0, root.progress))
                 height: parent.height
-                radius: 2
+                radius: 3
                 color: Theme.accent
                 Behavior on width { NumberAnimation { duration: 150 } }
             }
         }
 
         Label {
-            Layout.preferredWidth: 240
+            Layout.preferredWidth: 280
+            Layout.alignment: Qt.AlignVCenter
             elide: Label.ElideMiddle
             text: root.running ? root.currentPath : qsTr("Idle")
             color: Theme.textSecondary
             font.pixelSize: 11
+            font.family: "JetBrains Mono"
         }
     }
 }

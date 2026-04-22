@@ -10,8 +10,8 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 800
-    minimumWidth: 960
-    minimumHeight: 600
+    minimumWidth: 1024
+    minimumHeight: 640
     title: qsTr("Vaulkeeper")
     color: Theme.surface
 
@@ -50,23 +50,29 @@ ApplicationWindow {
 
             Rectangle {
                 Layout.fillWidth: true
-                implicitHeight: 28
+                implicitHeight: 30
                 color: Theme.surfaceAlt
-                Label {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 12
-                    text: applicationVm.status
-                    color: Theme.textSecondary
-                    font.pixelSize: 12
-                }
-                Label {
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: 12
-                    text: "Vaulkeeper " + appVersion
-                    color: Theme.textSecondary
-                    font.pixelSize: 12
+
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 16
+                    anchors.rightMargin: 16
+                    spacing: 16
+
+                    Label {
+                        text: applicationVm.status
+                        color: Theme.textSecondary
+                        font.pixelSize: 12
+                        Layout.fillWidth: true
+                        elide: Label.ElideRight
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    Label {
+                        text: "Vaulkeeper " + appVersion
+                        color: Theme.textSecondary
+                        font.pixelSize: 12
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
         }

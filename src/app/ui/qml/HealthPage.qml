@@ -6,30 +6,44 @@ import Vaulkeeper
 
 Item {
     ScrollView {
+        id: scroll
         anchors.fill: parent
-        padding: 24
+        clip: true
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         ColumnLayout {
-            width: parent.width - 48
-            spacing: 16
+            width: scroll.availableWidth
+            spacing: 18
+
+            Item { Layout.preferredHeight: 28 }
 
             Label {
                 text: qsTr("Health")
                 color: Theme.textPrimary
-                font.pixelSize: 22
+                font.pixelSize: 24
                 font.bold: true
+                Layout.leftMargin: 28
+                Layout.rightMargin: 28
+                Layout.fillWidth: true
+                elide: Label.ElideRight
             }
 
             Label {
                 text: healthVm.summary
                 color: Theme.textSecondary
                 font.pixelSize: 13
+                wrapMode: Label.WordWrap
+                Layout.leftMargin: 28
+                Layout.rightMargin: 28
+                Layout.fillWidth: true
             }
 
             GridLayout {
-                columns: 2
-                rowSpacing: 12
-                columnSpacing: 12
+                columns: scroll.availableWidth < 760 ? 1 : 2
+                rowSpacing: 14
+                columnSpacing: 14
+                Layout.leftMargin: 28
+                Layout.rightMargin: 28
                 Layout.fillWidth: true
 
                 Repeater {
@@ -46,6 +60,8 @@ Item {
             }
 
             Card {
+                Layout.leftMargin: 28
+                Layout.rightMargin: 28
                 title: qsTr("Physical disks")
                 subtitle: qsTr("SMART summary, wear and temperature")
 
@@ -55,6 +71,8 @@ Item {
                         text: modelData.model + " (" + modelData.capacity + ")"
                         color: Theme.textSecondary
                         font.pixelSize: 12
+                        Layout.fillWidth: true
+                        elide: Label.ElideRight
                     }
                 }
 
@@ -63,8 +81,11 @@ Item {
                     text: qsTr("No SMART data yet")
                     color: Theme.textSecondary
                     font.pixelSize: 12
+                    Layout.fillWidth: true
                 }
             }
+
+            Item { Layout.preferredHeight: 28 }
         }
     }
 }
