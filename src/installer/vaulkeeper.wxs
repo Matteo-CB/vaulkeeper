@@ -10,6 +10,7 @@
         <Package InstallerVersion="500"
                  Compressed="yes"
                  InstallScope="perMachine"
+                 Platform="x64"
                  Description="!(loc.Description)"
                  Manufacturer="Vaulkeeper" />
 
@@ -50,25 +51,25 @@
         </Directory>
 
         <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
-            <Component Id="MainApp" Guid="E7E27A5F-3BCD-4B4E-B927-3F0AD9A66E65">
+            <Component Id="MainApp" Win64="yes" Guid="E7E27A5F-3BCD-4B4E-B927-3F0AD9A66E65">
                 <File Id="VaulkeeperExe" Source="$(var.BuildBinDir)/vaulkeeper.exe" KeyPath="yes" />
             </Component>
-            <Component Id="CliApp" Guid="2BFC1E0E-7E42-4E7F-A9E4-1D1F7B7C04DC">
+            <Component Id="CliApp" Win64="yes" Guid="2BFC1E0E-7E42-4E7F-A9E4-1D1F7B7C04DC">
                 <File Id="VkCli" Source="$(var.BuildBinDir)/vk.exe" />
             </Component>
-            <Component Id="Agent" Guid="1AA54C4B-7181-456B-9FB6-FC18361F2AAE">
+            <Component Id="Agent" Win64="yes" Guid="1AA54C4B-7181-456B-9FB6-FC18361F2AAE">
                 <File Id="VaulkeeperAgentExe" Source="$(var.BuildBinDir)/VaulkeeperAgent.exe" />
             </Component>
-            <Component Id="Updater" Guid="9C5B2AC8-2F5E-43E4-9D4C-9A4F1B5F52FD">
+            <Component Id="Updater" Win64="yes" Guid="9C5B2AC8-2F5E-43E4-9D4C-9A4F1B5F52FD">
                 <File Id="VkUpdaterExe" Source="$(var.BuildBinDir)/vk-updater.exe" />
             </Component>
         </ComponentGroup>
 
-        <Component Id="ShellExtensionComponent" Directory="INSTALLFOLDER" Guid="7F27D0C4-79A6-4D73-8DD2-D9F8E18EB7E2">
+        <Component Id="ShellExtensionComponent" Directory="INSTALLFOLDER" Win64="yes" Guid="7F27D0C4-79A6-4D73-8DD2-D9F8E18EB7E2">
             <File Id="ShellExtDll" Source="$(var.BuildBinDir)/vaulkeeper.shellext.dll" KeyPath="yes" SelfRegCost="1" />
         </Component>
 
-        <Component Id="RegistryEntries" Directory="INSTALLFOLDER" Guid="7C0D2F7B-5E41-47BE-8C4F-1E8BBBD40DDC">
+        <Component Id="RegistryEntries" Directory="INSTALLFOLDER" Win64="yes" Guid="7C0D2F7B-5E41-47BE-8C4F-1E8BBBD40DDC">
             <RegistryValue Root="HKLM"
                            Key="Software\Vaulkeeper"
                            Name="InstallPath"
@@ -82,7 +83,7 @@
                            Value="$(var.ProductVersion)" />
         </Component>
 
-        <Component Id="PathEntry" Directory="INSTALLFOLDER" Guid="D1E40A7A-4A2D-4F44-90A0-7C94EBA2A6E2">
+        <Component Id="PathEntry" Directory="INSTALLFOLDER" Win64="yes" Guid="D1E40A7A-4A2D-4F44-90A0-7C94EBA2A6E2">
             <RegistryValue Root="HKLM"
                            Key="Software\Vaulkeeper\Cli"
                            Name="Added"
