@@ -27,7 +27,12 @@ function(vk_apply_compiler_flags target)
             /EHsc
             /bigobj
             /diagnostics:caret
-            /MP)
+            /MP
+            /wd4702
+            /wd4458
+            /wd4459
+            /wd4267
+            /wd4244)
 
         if(VK_STRICT_WARNINGS)
             target_compile_options(${target} PRIVATE /WX)

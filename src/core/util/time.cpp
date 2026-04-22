@@ -12,7 +12,8 @@ std::int64_t toUnixNanos(TimePoint tp) noexcept {
 }
 
 TimePoint fromUnixNanos(std::int64_t nanos) noexcept {
-    return TimePoint { std::chrono::nanoseconds { nanos } };
+    const auto asNs = std::chrono::nanoseconds { nanos };
+    return TimePoint { std::chrono::duration_cast<SystemClock::duration>(asNs) };
 }
 
 std::string formatIso8601(TimePoint tp) {
